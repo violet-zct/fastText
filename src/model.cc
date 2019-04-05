@@ -36,7 +36,8 @@ Model::Model(
   wi_ = wi;
   wo_ = wo;
   args_ = args;
-  osz_ = wo->size(0);
+  osz_ = dict_->nwords();
+//  osz_ = wo->size(0);
   hsz_ = args->dim;
   negpos = 0;
   loss_ = 0.0;
