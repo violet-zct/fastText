@@ -38,6 +38,8 @@ class Model {
     std::shared_ptr<QMatrix> qwo_;
     std::shared_ptr<Args> args_;
     Vector hidden_;
+    Vector hidden_out_;
+
     Vector output_;
     Vector grad_;
     int32_t hsz_;

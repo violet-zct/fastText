@@ -672,7 +672,8 @@ void FastText::train(const Args args) {
   if (args_->model == model_name::sup) {
     output_ = std::make_shared<Matrix>(dict_->nlabels(), args_->dim);
   } else {
-    output_ = std::make_shared<Matrix>(dict_->nwords(), args_->dim);
+//    output_ = std::make_shared<Matrix>(dict_->nwords(), args_->dim);
+    output_ = std::make_shared<Matrix>(dict_->nwords()+args_->bucket, args_->dim);
   }
   output_->zero();
   startThreads();

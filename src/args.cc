@@ -43,6 +43,8 @@ Args::Args() {
   qnorm = false;
   cutoff = 0;
   dsub = 2;
+
+  use_word = true;
 }
 
 std::string Args::lossToString(loss_name ln) const {
@@ -166,7 +168,10 @@ void Args::parseArgs(const std::vector<std::string>& args) {
         cutoff = std::stoi(args.at(ai + 1));
       } else if (args[ai] == "-dsub") {
         dsub = std::stoi(args.at(ai + 1));
-      } else {
+      } else if (args[ai] == "-use_word") {
+        use_word = std::stoi(args.at(ai + 1)); // 0 for false and else for true
+        std::cerr << "use_word " << use_word << std::endl;
+       } else {
         std::cerr << "Unknown argument: " << args[ai] << std::endl;
         printHelp();
         exit(EXIT_FAILURE);
