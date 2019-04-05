@@ -18,7 +18,7 @@ namespace fasttext {
 
 Args::Args() {
   lr = 0.05;
-  dim = 100;
+  dim = 300;
   ws = 5;
   epoch = 5;
   minCount = 5;

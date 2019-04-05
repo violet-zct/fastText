@@ -27,7 +27,7 @@ Model::Model(
     int32_t seed,
     std::shared_ptr<Dictionary> dict)
     : hidden_(args->dim),
-      hidden_out_(args_->dim),
+      hidden_out_(args->dim),
       output_(wo->size(0)),
       grad_(args->dim),
       rng(seed),
