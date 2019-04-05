@@ -19,6 +19,7 @@
 #include "vector.h"
 #include "qmatrix.h"
 #include "real.h"
+#include "dictionary.h"
 
 namespace fasttext {
 
