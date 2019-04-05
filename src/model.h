@@ -88,6 +88,7 @@ class Model {
                    Vector&, Vector&) const;
     void update(const std::vector<int32_t>&, int32_t, real);
     void computeHidden(const std::vector<int32_t>&, Vector&) const;
+    void computeHiddenOut(const std::vector<int32_t>&, Vector&) const;
     void computeOutputSoftmax(Vector&, Vector&) const;
     void computeOutputSoftmax();
 

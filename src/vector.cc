@@ -92,6 +92,15 @@ void Vector::mul(const QMatrix& A, const Vector& vec) {
   }
 }
 
+real Vector::mul(const Vector& vec) {
+  assert(size() == vec.size());
+  real s = 0.;
+  for (int64_t i = 0; i < size(); i++) {
+    s += data_[i] * vec.data_[i];
+  }
+  return s;
+}
+
 int64_t Vector::argmax() {
   real max = data_[0];
   int64_t argmax = 0;

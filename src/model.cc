@@ -58,8 +58,9 @@ void Model::setQuantizePointer(std::shared_ptr<QMatrix> qwi,
 
 real Model::binaryLogistic(int32_t target, bool label, real lr) {
   const std::vector<int32_t>& ngrams = dict_->getSubwords(target);
-  computeHidden(ngrams, hidden_out_);
-  real score = sigmoid(wo_->dotRow(hidden_, target));
+  computeHiddenOut(ngrams, hidden_out_);
+//  real score = sigmoid(wo_->dotRow(hidden_, target));
+  real score = sigmoid(hidden_out_.mul(hidden_));
   real alpha = lr * (real(label) - score);
 //  grad_.addRow(*wo_, target, alpha);
   grad_.addVector(hidden_out_);
@@ -142,6 +143,15 @@ void Model::computeHidden(const std::vector<int32_t>& input, Vector& hidden) con
     } else {
       hidden.addRow(*wi_, *it);
     }
+  }
+  hidden.mul(1.0 / input.size());
+}
+
+void Model::computeHiddenOut(const std::vector<int32_t>& input, Vector& hidden) const {
+  assert(hidden.size() == hsz_);
+  hidden.zero();
+  for (auto it = input.cbegin(); it != input.cend(); ++it) {
+    hidden.addRow(*wo_, *it);
   }
   hidden.mul(1.0 / input.size());
 }

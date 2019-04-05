@@ -56,6 +56,7 @@ class Vector {
     void addRow(const Matrix&, int64_t, real);
     void mul(const QMatrix&, const Vector&);
     void mul(const Matrix&, const Vector&);
+    real mul(const Vector&);
     int64_t argmax();
 };
 
