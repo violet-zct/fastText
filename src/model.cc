@@ -25,7 +25,7 @@ Model::Model(
     std::shared_ptr<Matrix> wo,
     std::shared_ptr<Args> args,
     int32_t seed,
-    std::shared_ptr<Dictionary> dict;)
+    std::shared_ptr<Dictionary> dict)
     : hidden_(args->dim),
       output_(wo->size(0)),
       grad_(args->dim),
