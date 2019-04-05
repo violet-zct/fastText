@@ -24,12 +24,14 @@ Model::Model(
     std::shared_ptr<Matrix> wi,
     std::shared_ptr<Matrix> wo,
     std::shared_ptr<Args> args,
-    int32_t seed)
+    int32_t seed,
+    std::shared_ptr<Dictionary> dict;)
     : hidden_(args->dim),
       output_(wo->size(0)),
       grad_(args->dim),
       rng(seed),
       quant_(false) {
+  dict_ = dict;
   wi_ = wi;
   wo_ = wo;
   args_ = args;
@@ -54,12 +56,12 @@ void Model::setQuantizePointer(std::shared_ptr<QMatrix> qwi,
 }
 
 real Model::binaryLogistic(int32_t target, bool label, real lr) {
-  const std::vector<int32_t>& ngrams = dict_->getSubwords(line[w]);
+  const std::vector<int32_t>& ngrams = dict_->getSubwords(target);
   computeHidden(ngrams, hidden_out_);
   real score = sigmoid(wo_->dotRow(hidden_, target));
   real alpha = lr * (real(label) - score);
 //  grad_.addRow(*wo_, target, alpha);
-  grad_.adVector(hidden_out_);
+  grad_.addVector(hidden_out_);
   for (auto it = ngrams.cbegin(); it != ngrams.cend(); ++it) {
     wo_->addRow(hidden_, *it, alpha);
   }

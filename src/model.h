@@ -39,6 +39,7 @@ class Model {
     std::shared_ptr<Args> args_;
     Vector hidden_;
     Vector hidden_out_;
+    std::shared_ptr<Dictionary> dict_;
 
     Vector output_;
     Vector grad_;
@@ -67,7 +68,7 @@ class Model {
 
   public:
     Model(std::shared_ptr<Matrix>, std::shared_ptr<Matrix>,
-          std::shared_ptr<Args>, int32_t);
+          std::shared_ptr<Args>, int32_t, std::shared_ptr<Dictionary>);
 
     real binaryLogistic(int32_t, bool, real);
     real negativeSampling(int32_t, real);
